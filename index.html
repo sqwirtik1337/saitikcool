@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baikalchik Houses | Проект 11Б</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #050505; 
+            color: white; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+        }
+
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+        }
+
+        .page-section { display: none; }
+        .page-section.active { 
+            display: block; 
+            animation: fadeIn 0.5s ease-in-out; 
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .btn-blue { 
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-black uppercase text-[10px] tracking-widest px-8 py-4 rounded-full transition-all active:scale-95 shadow-lg shadow-blue-600/20; 
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.1);
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-[100] glass h-20 flex items-center justify-between px-6 md:px-12">
+        <div onclick="showPage('home')" class="font-black text-xl text-blue-600 italic uppercase cursor-pointer tracking-tighter">
+            Baikalchik houses
+        </div>
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest">
+            <button onclick="showPage('home')" class="hover:text-blue-500 transition">Главная</button>
+            <button onclick="showPage('portfolio')" class="hover:text-blue-500 transition">Портфолио</button>
+            <button onclick="showPage('home'); setTimeout(()=>document.getElementById('contacts').scrollIntoView(), 100);" class="hover:text-blue-500 transition">Контакты</button>
+        </div>
+    </nav>
+
+    <main id="home" class="page-section active">
+        <section class="h-screen flex flex-col justify-center items-center text-center px-6 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black">
+            <h1 class="text-7xl md:text-9xl font-black italic uppercase tracking-tighter mb-4">MODUL <span class="text-blue-600">PRO</span></h1>
+            <p class="text-gray-400 max-w-2xl text-lg font-light mb-8 italic">Инженерные решения для жизни в суровых условиях Прибайкалья.</p>
+            <button onclick="document.getElementById('services').scrollIntoView()" class="btn-blue">Каталог домов</button>
+        </section>
+
+        <section id="about" class="py-32 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div onclick="openJokeModal()" class="order-2 md:order-1 h-96 glass rounded-[3rem] overflow-hidden border border-white/5 cursor-pointer group relative">
+                <div class="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                    <span class="font-black italic uppercase text-xs tracking-widest text-white">ПОСХАЛОЧКО</span>
+                </div>
+                <img src="img/about.jpg" class="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-100 group-hover:scale-110 transition duration-700" alt="About">
+            </div>
+
+            <div class="order-1 md:order-2">
+                <h2 class="text-5xl font-black uppercase italic mb-8">О <span class="text-blue-600">нас</span></h2>
+                <p class="text-gray-400 leading-relaxed mb-6">Мы — команда инженеров из Улан-Удэ. Наша цель — сделать современное жилье доступным и вечным. Используем металлокаркас повышенной прочности.</p>
+                <div class="p-6 border-l-4 border-blue-600 bg-blue-600/5 italic text-sm text-gray-300">
+                    "Технологии будущего для вашего комфорта сегодня."
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-32 px-6 bg-white/5">
+            <h2 class="text-center text-5xl font-black uppercase italic mb-20">Варианты <span class="text-blue-600">домов</span></h2>
+            <div class="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+                
+                <div class="glass p-8 rounded-[3rem] text-center flex flex-col justify-between transition hover:border-blue-600/50 group">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-6 border border-white/10">
+                        <img src="img/cheap1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 uppercase italic">Дешевенький</h3>
+                    <p class="text-gray-500 text-sm mb-4">Быстровозводимый модуль для летнего отдыха.</p>
+                    <p class="text-blue-500 font-bold text-xs mb-8">Срок службы: 500+ лет</p>
+                    <button onclick="showPage('cheap')" class="btn-blue mt-auto">Детали проекта</button>
+                </div>
+                
+                <div class="glass p-8 rounded-[3rem] text-center border-blue-600/30 flex flex-col justify-between scale-105 hover:border-blue-600/60 transition group">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-6 border border-white/10">
+                        <img src="img/cheap2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 uppercase italic">Среднячок</h3>
+                    <p class="text-gray-500 text-sm mb-4">Оптимальный теплый дом для семьи.</p>
+                    <p class="text-blue-500 font-bold text-xs mb-8">Срок службы: 500+ лет</p>
+                    <button onclick="showPage('medium')" class="btn-blue mt-auto">Детали проекта</button>
+                </div>
+                
+                <div class="glass p-8 rounded-[3rem] text-center flex flex-col justify-between transition hover:border-blue-600/50 group">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-6 border border-white/10">
+                        <img src="img/cheap3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 uppercase italic text-blue-500">Лакшери вип дабл р</h3>
+                    <p class="text-gray-500 text-sm mb-4">Панорамные окна и умный дом в комплекте.</p>
+                    <p class="text-blue-500 font-bold text-xs mb-8">Срок службы: 500+ лет</p>
+                    <button onclick="showPage('luxury')" class="btn-blue mt-auto">Детали проекта</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contacts" class="py-32 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="text-5xl font-black uppercase italic mb-10 text-blue-600">Контакты</h2>
+                    <p class="text-xl font-bold italic mb-2">+7 (999) 777-67-67</p>
+                    <p class="text-gray-400 mb-10">г. Улан-Удэ, ул. Большая Риковенс, д. 1337</p>
+                    
+                    <a href="https://yandex.ru/maps/25/ulan-ude/?ll=107.584838%2C51.833507&z=12" target="_blank" class="block rounded-[2rem] overflow-hidden h-64 glass border border-white/5 relative group cursor-pointer">
+                        <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center z-10">
+                            <span class="font-bold uppercase tracking-widest text-sm text-white">Открыть на карте</span>
+                        </div>
+                        <img src="img/map.jpg" alt="Карта Улан-Удэ" class="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 transition duration-500">
+                    </a>
+                </div>
+                <div class="glass p-10 rounded-[3rem] border-blue-600/20">
+                    <h3 class="font-black uppercase mb-6 italic text-center">Форма связи</h3>
+                    <form onsubmit="sendTG(event, 'Общий контакт', 0)" class="space-y-4">
+                        <input type="text" placeholder="ВАШЕ ИМЯ" required class="w-full bg-white/5 border border-white/10 rounded-full px-8 py-4 outline-none focus:border-blue-600">
+                        <input type="tel" placeholder="ТЕЛЕФОН" required class="w-full bg-white/5 border border-white/10 rounded-full px-8 py-4 outline-none focus:border-blue-600">
+                        <input type="hidden" class="area-slider" value="0">
+                        <button type="submit" class="w-full btn-blue h-16 shadow-2xl">Отправить данные</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="cheap" class="page-section pt-32 px-6 max-w-5xl mx-auto pb-20">
+        <button onclick="showPage('home')" class="text-blue-600 font-black text-[10px] uppercase mb-10 block hover:underline">← Назад в меню</button>
+        <h2 class="text-6xl font-black uppercase italic mb-6">Проект <span class="text-blue-600">Дешевенький вариант</span></h2>
+        
+        <div class="glass p-8 rounded-[2rem] mb-10 text-gray-300 leading-relaxed">
+            <p class="mb-4">Идеальный баланс цены и качества для тех, кто ценит функциональность. Мобильность конструкции и быстрый монтаж позволяют организовать уютное пространство в кратчайшие сроки.</p>
+            <ul class="list-disc list-inside text-gray-400 text-sm mb-4 space-y-1">
+                <li>Утепление: 150мм (базальтовая вата) — подходит для весны, лета и осени.</li>
+                <li>Планировка: компактная студия + выделенный санузел.</li>
+                <li>Монтаж на участке за 1-2 дня без капитального фундамента.</li>
+            </ul>
+            <p class="text-blue-500 font-black uppercase text-sm">Срок службы: 500+ лет</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="h-80 glass rounded-[2rem] overflow-hidden"><img src="img/cheap1.jpg" class="w-full h-full object-cover"></div>
+            <div class="h-80 glass rounded-[2rem] overflow-hidden">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="video/cheap.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="glass p-10 rounded-[3rem] border-blue-600/20">
+            <div class="mb-10 text-center">
+                <h4 class="font-black uppercase mb-4 italic text-xl">Рассчитать стоимость</h4>
+                <p class="text-gray-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">Наш калькулятор учитывает не только площадь, но и ваши индивидуальные предпочтения. Получите прозрачную смету без скрытых платежей всего за 1 минуту.</p>
+            </div>
+
+            <form onsubmit="sendTG(event, 'Проект: Дешевенький', 35000)" class="space-y-8">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex justify-between font-bold italic text-blue-500">
+                        <span>Площадь: <span class="area-val">45</span> м²</span>
+                        <span>Цена: <span class="price-val">1 575 000</span> ₽</span>
+                    </div>
+                    <input type="range" min="20" max="150" value="45" class="w-full area-slider" oninput="updatePrice(this, 35000)">
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                    <input type="text" placeholder="ВАШЕ ИМЯ" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <input type="tel" placeholder="ТЕЛЕФОН" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <button type="submit" class="btn-blue h-full">Забронировать цену</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="medium" class="page-section pt-32 px-6 max-w-5xl mx-auto pb-20">
+        <button onclick="showPage('home')" class="text-blue-600 font-black text-[10px] uppercase mb-10 block hover:underline">← Назад в меню</button>
+        <h2 class="text-6xl font-black uppercase italic mb-6">Проект <span class="text-blue-600">Среднячок</span></h2>
+        
+        <div class="glass p-8 rounded-[2rem] mb-10 text-gray-300 leading-relaxed">
+            <p class="mb-4">Оптимальный выбор для постоянного проживания с улучшенной планировкой. Мы используем износостойкие материалы, которые гарантируют комфорт в любой сезон и лютый сибирский мороз.</p>
+            <ul class="list-disc list-inside text-gray-400 text-sm mb-4 space-y-1">
+                <li>Утепление: 200мм — полноценный зимний вариант (термос).</li>
+                <li>Планировка: просторная кухня-гостиная + 1 или 2 изолированные спальни.</li>
+                <li>Встроена система теплых полов и приточная вентиляция.</li>
+            </ul>
+            <p class="text-blue-500 font-black uppercase text-sm">Срок службы: 500+ лет</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="h-80 glass rounded-[2rem] overflow-hidden"><img src="img/cheap2.jpg" class="w-full h-full object-cover"></div>
+            <div class="h-80 glass rounded-[2rem] overflow-hidden">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="video/cheap2.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="glass p-10 rounded-[3rem] border-blue-600/20">
+            <div class="mb-10 text-center">
+                <h4 class="font-black uppercase mb-4 italic text-xl">Рассчитать стоимость</h4>
+                <p class="text-gray-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">Мы поможем вам спланировать бюджет строительства с точностью до рубля. Выберите желаемую площадь и отправьте заявку на расчет.</p>
+            </div>
+
+            <form onsubmit="sendTG(event, 'Проект: Среднячок', 55000)" class="space-y-8">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex justify-between font-bold italic text-blue-500">
+                        <span>Площадь: <span class="area-val">60</span> м²</span>
+                        <span>Цена: <span class="price-val">3 300 000</span> ₽</span>
+                    </div>
+                    <input type="range" min="20" max="150" value="60" class="w-full area-slider" oninput="updatePrice(this, 55000)">
+                </div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <input type="text" placeholder="ВАШЕ ИМЯ" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <input type="tel" placeholder="ТЕЛЕФОН" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <button type="submit" class="btn-blue h-full">Забронировать цену</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="luxury" class="page-section pt-32 px-6 max-w-5xl mx-auto pb-20">
+        <button onclick="showPage('home')" class="text-blue-600 font-black text-[10px] uppercase mb-10 block hover:underline">← Назад в меню</button>
+        <h2 class="text-6xl font-black uppercase italic mb-6 text-blue-500 tracking-tighter">Лакшери вип дабл р</h2>
+        
+        <div class="glass p-8 rounded-[2rem] mb-10 text-gray-300 leading-relaxed">
+            <p class="mb-4">Флагманское решение с эксклюзивным дизайном и премиальной отделкой. Этот дом воплощает в себе статус и технологичность, предлагая максимум пространства для жизни и работы.</p>
+            <ul class="list-disc list-inside text-gray-400 text-sm mb-4 space-y-1">
+                <li>Панорамное остекление с энергосберегающим напылением.</li>
+                <li>Премиальная отделка: дерево, натуральный камень, металл.</li>
+                <li>Интеграция системы «Умный дом» (свет, климат, безопасность) в базовой комплектации.</li>
+            </ul>
+            <p class="text-blue-500 font-black uppercase text-sm">Срок службы: 500+ лет</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="h-80 glass rounded-[2rem] overflow-hidden"><img src="img/cheap3.jpg" class="w-full h-full object-cover"></div>
+            <div class="h-80 glass rounded-[2rem] overflow-hidden">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="video/cheap3.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="glass p-10 rounded-[3rem] border-blue-600/40 shadow-2xl shadow-blue-900/20">
+            <div class="mb-10 text-center">
+                <h4 class="font-black uppercase mb-4 italic text-xl">Рассчитать стоимость флагмана</h4>
+                <p class="text-gray-400 text-sm mb-8 max-w-2xl mx-auto leading-relaxed">Эксклюзивный подход требует точных расчетов. Зафиксируйте желаемую площадь, и наши инженеры свяжутся с вами для детальной консультации.</p>
+            </div>
+
+            <form onsubmit="sendTG(event, 'Проект: Лакшери Вип', 95000)" class="space-y-8">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex justify-between font-bold italic text-blue-500">
+                        <span>Площадь: <span class="area-val">100</span> м²</span>
+                        <span>Цена: <span class="price-val">9 500 000</span> ₽</span>
+                    </div>
+                    <input type="range" min="40" max="300" value="100" class="w-full area-slider" oninput="updatePrice(this, 95000)">
+                </div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <input type="text" placeholder="ВАШЕ ИМЯ" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <input type="tel" placeholder="ТЕЛЕФОН" required class="bg-white/5 border border-white/10 rounded-full px-6 py-4 outline-none focus:border-blue-600 transition">
+                    <button type="submit" class="btn-blue h-full">Получить смету</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="portfolio" class="page-section pt-32 px-6 max-w-7xl mx-auto pb-20">
+        <h2 class="text-7xl font-black uppercase italic mb-8 text-center tracking-tighter">Наши <span class="text-blue-600">работы</span></h2>
+        
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                Baikalchik houses — это не просто стройка, это философия свободы. За годы работы мы спроектировали и установили <span class="text-white font-bold">более 50 уникальных модульных домов</span> в самых живописных и труднодоступных местах Республики.
+            </p>
+            <p class="text-gray-400 leading-relaxed mb-6">
+                Наши проекты рассчитаны на суровый сибирский климат. Мы используем усиленный металлокаркас, базальтовое утепление премиум-класса и энергоэффективные стеклопакеты.
+            </p>
+            <div class="inline-block p-4 border border-blue-600/30 bg-blue-600/5 rounded-2xl text-blue-400 font-medium italic">
+                Каждый проект проходит строгий инженерный контроль качества на всех этапах сборки.
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass p-6 rounded-[2rem] hover:border-blue-600/30 hover:-translate-y-2 transition duration-300">
+                <div class="h-64 rounded-2xl overflow-hidden mb-6">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="video/work1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3 class="font-black text-xl italic uppercase text-blue-500 mb-2">Объект "Байкальская Гавань"</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Масштабный проект туристического комплекса. Успешная реализация монтажа модулей прямо в зимних условиях на берегу Байкала. Высокая устойчивость к ветровым нагрузкам.</p>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Год реализации: 2029</span>
+            </div>
+            
+            <div class="glass p-6 rounded-[2rem] hover:border-blue-600/30 hover:-translate-y-2 transition duration-300">
+                <div class="h-64 rounded-2xl overflow-hidden mb-6">
+                    <img src="img/work2.jpg" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-black text-xl italic uppercase text-blue-500 mb-2">Объект "Светлый-2026"</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Полностью автономный жилой модуль для круглогодичного проживания. Оснащен солнечными панелями, системой рекуперации воздуха и умным подогревом пола.</p>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Год реализации: 2026</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center border-t border-white/5 bg-[#020202]">
+        <h2 class="text-blue-600 font-black text-xl uppercase italic mb-4">Baikalchik houses</h2>
+        <p class="text-gray-400 text-sm mb-2">ООО "Boriska evil corp."</p>
+        <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-6">г. Улан-Удэ, ул. Большая Риковенс, д. 1337 | +7 (999) 777-67-67</p>
+        <div class="opacity-30 text-[9px] font-black uppercase tracking-[0.5em]">11 "Б" Класс | 2026</div>
+    </footer>
+
+    <div id="jokeModal" class="fixed inset-0 z-[200] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl glass rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-blue-600/20">
+            <button onclick="closeJokeModal()" class="absolute top-6 right-6 z-10 text-white/50 hover:text-white transition text-3xl font-light">&times;</button>
+            <div class="aspect-video w-full bg-black">
+                <video id="jokeVideo" playsinline class="w-full h-full object-contain">
+                    <source src="video/joke.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Рофлик
+        const modal = document.getElementById('jokeModal');
+        const video = document.getElementById('jokeVideo');
+
+        function openJokeModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            video.play();
+        }
+
+        function closeJokeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeJokeModal();
+        });
+
+        // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updatePrice(slider, pricePerMeter) {
+            const form = slider.closest('form');
+            const area = slider.value;
+            const totalPrice = area * pricePerMeter;
+            form.querySelector('.area-val').innerText = area;
+            form.querySelector('.price-val').innerText = totalPrice.toLocaleString('ru-RU');
+        }
+
+        //  (ОБФУСКАЦИЯ)
+        const _tk = atob("ODQ1MDE1MzQxNzpBQUVOa0VqazN0Rkk2dW41VEZyWHFuYmR5NDlDeFh4VnF4cw==");
+        const _cid = atob("MTA2NjgxMjk0Mg==");
+
+        async function sendTG(event, projectTitle, pricePerMeter) {
+            event.preventDefault();
+            const form = event.target;
+            const name = form.querySelector('input[type="text"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
+            const areaInput = form.querySelector('.area-slider');
+            
+            let areaInfo = "";
+            let priceInfo = "";
+            if (areaInput && pricePerMeter > 0) {
+                const area = areaInput.value;
+                const finalPrice = (area * pricePerMeter).toLocaleString('ru-RU');
+                areaInfo = `\n📐 Площадь: <b>${area} м²</b>`;
+                priceInfo = `\n💰 Цена: <b>${finalPrice} ₽</b>`;
+            }
+
+            const text = `🚀 <b>ЗАЯВКА!</b>\n🏠 ${projectTitle}${areaInfo}${priceInfo}\n---\n👤 ${name}\n📞 ${phone}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${_tk}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: _cid, parse_mode: 'html', text: text })
+                });
+                if(response.ok) {
+                    alert('Данные отправлены!');
+                    form.reset();
+                }
+            } catch (e) {
+                alert('Ошибка соединения.');
+            }
+        }
+    </script>
+</body>
+</html>
